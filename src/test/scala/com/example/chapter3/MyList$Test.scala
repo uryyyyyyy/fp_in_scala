@@ -190,4 +190,18 @@ class MyList$Test extends FunSuite {
 		assert(r3 == Nil)
 	}
 
+	test("testHasSubSequence") {
+		val as = MyList(1,2,3,4,5)
+		val r = MyList.hasSubSequence(as, MyList(1,2))
+		assert(r)
+		val r2 = MyList.hasSubSequence(as, MyList(1,2,3,4,5,6))
+		assert(!r2)
+		val r3 = MyList.hasSubSequence(as, MyList(1,3))
+		assert(!r3)
+		val r4 = MyList.hasSubSequence(as, Nil)
+		assert(r4)
+		val r5 = MyList.hasSubSequence(Nil, MyList(1,3))
+		assert(!r5)
+	}
+
 }

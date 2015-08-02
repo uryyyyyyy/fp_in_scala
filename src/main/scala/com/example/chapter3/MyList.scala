@@ -135,4 +135,20 @@ object MyList {
 			case (Cons(ah, at), Cons(bh, bt)) => Cons(f(ah, bh), zipWith(at, bt)(f))
 		}
 	}
+
+	def hasSubSequence[A](as: MyList[A], sub: MyList[A]): Boolean = {
+		@tailrec
+		def hasSubSequence_(ass: MyList[A], subs: MyList[A]):Boolean = {
+			(ass, subs) match {
+				case (_, Nil) => true
+				case (Nil, _) => false
+				case (Cons(ah, at), Cons(bh, bt)) if ah != bh => false
+				case (Cons(ah, at), Cons(bh, bt)) => hasSubSequence_(at, bt)
+			}
+		}
+		(as,sub) match {
+			case (Cons(ah, at), Cons(bh, bt)) if ah == bh => hasSubSequence(at, bt)
+			case (a,b) => hasSubSequence_(a, b)
+		}
+	}
 }
