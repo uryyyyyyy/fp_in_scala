@@ -4,7 +4,7 @@ sealed trait MyTree[+A]
 case class Leaf[A](value: A) extends MyTree[A]
 case class Branch[A](left: MyTree[A], right: MyTree[A]) extends MyTree[A]
 
-object MyList {
+object MyTree {
 
 	def size[A](xs: MyTree[A]): Long = {
 		xs match {
