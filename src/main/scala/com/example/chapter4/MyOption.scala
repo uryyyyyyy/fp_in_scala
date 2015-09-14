@@ -67,4 +67,18 @@ object MyOption {
 		}
 	}
 
+	def traverse[A, B](xs: List[A])(f:A => MyOption[B]): MyOption[List[B]] = {
+		xs match {
+			case Nil => Some(Nil)
+			case a :: as => for{
+				b <- f(a)
+				bs <- traverse(as)(f)
+			}yield b :: bs
+		}
+	}
+
+	def sequence2[A](a: List[MyOption[A]]): MyOption[List[A]] = {
+		traverse(a)(x => x)
+	}
+
 }
